@@ -9,9 +9,10 @@ const TolltipIconAction = ({
   isActive,
   onClick,
   iconBtnSx,
+  isArrow,
 }) => {
   return (
-    <Tooltip title={title} arrow placement={position}>
+    <Tooltip title={title} arrow={isArrow} placement={position}>
       <IconAction
         sx={{ backgroundColor: isActive ? "#7c3aed" : "#a8a29e", ...iconBtnSx }}
         onClick={onClick}

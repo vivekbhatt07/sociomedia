@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PageContainer } from "../../layout";
-import { CommentCard } from "../../components";
+import { CommentCard, IconAction } from "../../components";
+import { ArrowBack } from "@mui/icons-material";
 
 export default function Detail() {
+  const navigate = useNavigate();
   const { postId } = useParams();
   const [postData, setPostData] = useState(null);
   const [commentList, setCommentList] = useState([]);
@@ -42,7 +44,12 @@ export default function Detail() {
 
   return (
     <PageContainer>
-      <div className="p-4 border-b border-[#ddd] text-xl">Post Detail</div>
+      <div className="p-4 border-b border-[#ddd] text-xl flex items-center gap-4">
+        <IconAction onClick={() => navigate(-1)}>
+          <ArrowBack />
+        </IconAction>
+        <span>Post Detail</span>
+      </div>
       <div className="p-4 flex flex-col gap-6">
         <div>
           <h2>{postData?.title}</h2>
