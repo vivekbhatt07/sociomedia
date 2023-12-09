@@ -3,6 +3,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {
   Dashboard as DashboardIcon,
   LogoutOutlined,
+  Favorite,
+  ThumbUp,
 } from "@mui/icons-material";
 
 import { Button, Skeleton } from "@mui/material";
@@ -11,6 +13,8 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const pages = [
     { id: "0", title: "Posts", reach: "/", icon: <DashboardIcon /> },
+    { id: "1", title: "Like", reach: "/like", icon: <ThumbUp /> },
+    { id: "2", title: "Favorite", reach: "/favorite", icon: <Favorite /> },
   ];
 
   return (

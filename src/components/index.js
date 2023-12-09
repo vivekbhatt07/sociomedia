@@ -5,6 +5,7 @@ import SearchFilter from "./searchFilter";
 import PostCard from "./PostCard";
 import EmptyListCard from "./EmptyListCard";
 import CommentCard from "./CommentCard";
+import PostForm from "./postForm";
 
 export {
   IconAction,
@@ -17,4 +18,5 @@ export {
   SearchFilter,
   PostCard,
   CommentCard,
+  PostForm,
 };

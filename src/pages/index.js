@@ -1,4 +1,5 @@
 import Landing from "./landing";
 import Detail from "./detail";
-
-export { Landing, Detail };
+import Like from "./like";
+import Favorite from "./favorite";
+export { Landing, Detail, Like, Favorite };
