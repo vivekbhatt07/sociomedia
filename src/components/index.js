@@ -1,21 +1,20 @@
 import { IconAction, TextAction, TolltipIconAction } from "./buttons";
 import ModalProvider from "./ModalProvider";
-import AutoCompleteWithChips from "./AutoCompleteWithChips";
 import { DarkLoader, LightLoader } from "./Loader";
-import Auth from "./auth";
 import SearchFilter from "./searchFilter";
-
+import PostCard from "./PostCard";
 import EmptyListCard from "./EmptyListCard";
+import CommentCard from "./CommentCard";
 
 export {
   IconAction,
   TextAction,
   TolltipIconAction,
   ModalProvider,
-  AutoCompleteWithChips,
   LightLoader,
   DarkLoader,
   EmptyListCard,
-  Auth,
   SearchFilter,
+  PostCard,
+  CommentCard,
 };
