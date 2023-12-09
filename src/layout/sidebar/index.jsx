@@ -44,6 +44,7 @@ const Sidebar = () => {
             return (
               <Button
                 variant="text"
+                key={page.id}
                 sx={{
                   color: "#000000D9",
                   textTransform: "capitalize",
@@ -54,7 +55,6 @@ const Sidebar = () => {
                 }}
               >
                 <NavLink
-                  key={page.id}
                   to={page.reach}
                   className="flex items-center gap-3 w-full"
                   style={({ isActive }) => ({
