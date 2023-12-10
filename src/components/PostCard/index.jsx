@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TooltipIconAction from "../buttons/TooltipIconAction";
 import { Edit, Delete, Favorite, ThumbUp } from "@mui/icons-material";
 import ModalProvider from "../ModalProvider";
@@ -10,6 +10,7 @@ import { useLike } from "../../context/LikeContext";
 import { useFavorite } from "../../context/FavoriteContext";
 
 const PostCard = ({ postData }) => {
+  const navigate = useNavigate();
   const { state: likeState, dispatch: likeAction } = useLike();
   const { state: favoriteState, dispatch: favoriteAction } = useFavorite();
   const { state, editPost, deletePost } = usePost();
@@ -33,8 +34,11 @@ const PostCard = ({ postData }) => {
 
   return (
     <li className="bg-200 p-3 rounded-lg" onClick={(e) => e.stopPropagation()}>
-      <Link to={`/${postData.id}`} className="flex flex-col gap-12">
-        {/* <Link className="flex flex-col gap-12"> */}
+      <div
+        className="flex flex-col gap-12"
+        onClick={() => navigate(`/${postData.id}`)}
+      >
+        {/* <div className="flex flex-col gap-12"> */}
         <div className="flex flex-col gap-2">
           <h3 className="text-base font-medium">{postData.title}</h3>
           <p className="text-xs">{postData.body}</p>
@@ -53,7 +57,8 @@ const PostCard = ({ postData }) => {
                   backgroundColor: isLiked ? "#fff" : "#7c3aed",
                 },
               }}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 if (isLiked) {
                   likeAction({
                     type: "REMOVE_FROM_LIKE",
@@ -83,7 +88,8 @@ const PostCard = ({ postData }) => {
                   backgroundColor: isFavorite ? "#fff" : "#7c3aed",
                 },
               }}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 if (isFavorite) {
                   favoriteAction({
                     type: "REMOVE_FROM_FAVORITE",
@@ -113,7 +119,10 @@ const PostCard = ({ postData }) => {
                   position="top"
                   isArrow={true}
                   iconBtnSx={{ width: "35px", height: "35px" }}
-                  onClick={openEditModal}
+                  onClick={(e) => {
+                    openEditModal();
+                    e.stopPropagation();
+                  }}
                 >
                   <Edit sx={{ fontSize: "20px" }} />
                 </TooltipIconAction>
@@ -132,13 +141,16 @@ const PostCard = ({ postData }) => {
               position="top"
               isArrow={true}
               iconBtnSx={{ width: "35px", height: "35px" }}
-              onClick={() => deletePost(postData.id)}
+              onClick={(e) => {
+                deletePost(postData.id);
+                e.stopPropagation();
+              }}
             >
               <Delete sx={{ fontSize: "20px" }} />
             </TooltipIconAction>
           </div>
         </div>
-      </Link>
+      </div>
     </li>
   );
 };
