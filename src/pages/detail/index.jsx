@@ -70,7 +70,7 @@ export default function Detail() {
           {isPost ? (
             <Skeleton variant="rectangular" width="100%" height={48} />
           ) : (
-            <p>{postData?.body}</p>
+            <p className="text-xs">{postData?.body}</p>
           )}
         </div>
         <div className="flex flex-col gap-3">

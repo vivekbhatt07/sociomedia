@@ -3,13 +3,14 @@ import { PageContainer } from "../../layout";
 import axios from "axios";
 import PostCard from "../../components/PostCard";
 import {
+  EmptyListCard,
   IconAction,
   LightLoader,
   ModalProvider,
   PostForm,
   SearchFilter,
 } from "../../components";
-import { Add } from "@mui/icons-material";
+import { Add, Error } from "@mui/icons-material";
 import { usePost } from "../../context/PostContext";
 
 export default function Landing() {
@@ -28,7 +29,15 @@ export default function Landing() {
           isOpen={isAddPostModalOpen}
           closeModal={closeAddPostModal}
           OpenAction={
-            <IconAction onClick={openAddPostModal}>
+            <IconAction
+              onClick={openAddPostModal}
+              sx={{
+                backgroundColor: "#60a5fa",
+                "&:hover": {
+                  backgroundColor: "rgb(24, 144, 255)",
+                },
+              }}
+            >
               <Add />
             </IconAction>
           }
@@ -49,6 +58,12 @@ export default function Landing() {
             <LightLoader />
             <span>Loading Posts...</span>
           </div>
+        ) : filteredList.length === 0 ? (
+          <EmptyListCard
+            icon={<Error sx={{ fontSize: "80px", color: "#60a5fa" }} />}
+          >
+            No Post Found
+          </EmptyListCard>
         ) : (
           filteredList?.map((post) => {
             return <PostCard key={post.id} postData={post} />;

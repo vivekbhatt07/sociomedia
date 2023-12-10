@@ -12,7 +12,7 @@ const IconAction = styled(IconButton)(() => ({
   alignItems: "center",
   justifyContent: "center",
   "&:hover": {
-    backgroundColor: "#7c3aed",
+    backgroundColor: "rgb(24, 144, 255)",
   },
 }));
 

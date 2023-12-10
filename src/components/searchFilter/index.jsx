@@ -8,6 +8,9 @@ import {
   Select,
 } from "@mui/material";
 import { usePost } from "../../context/PostContext";
+import { TolltipIconAction } from "../buttons";
+import { RestartAlt } from "@mui/icons-material";
+import { toastHandler } from "../../utils";
 
 const SearchFilter = ({ className }) => {
   const { state, dispatch } = usePost();
@@ -28,7 +31,7 @@ const SearchFilter = ({ className }) => {
       <div className="flex flex-row gap-3">
         <input
           name="searchText"
-          className="rounded-full px-4 py-2 border focus:border outline-none border-[#ddd] focus:border-[#8b5cf6] bg-[#fff] transition-all duration-300 text-[#000] text-sm font-light"
+          className="rounded-full px-4 py-2 border-2 focus:border-2 outline-none border-[#ddd] focus:border-[#60a5fa] bg-[#fff] transition-all duration-300 text-[#000] text-sm font-light"
           placeholder={`Search for ${state.filterBy.search.searchType}`}
           value={state.filterBy.search.searchText}
           onChange={(e) => {
@@ -63,6 +66,17 @@ const SearchFilter = ({ className }) => {
               })}
             </Select>
           </FormControl>
+        </div>
+        <div className="my-auto">
+          <TolltipIconAction
+            title="Reset Filters"
+            onClick={() => {
+              dispatch({ type: "RESET_FILTERS" });
+              toastHandler("success", "Filters Reset Success");
+            }}
+          >
+            <RestartAlt />
+          </TolltipIconAction>
         </div>
       </div>
       <div style={{ minWidth: "160px" }}>
