@@ -34,7 +34,7 @@ const PostCard = ({ postData }) => {
 
   return (
     <li
-      className="bg-100 p-3 rounded-lg cursor-pointer"
+      className="bg-100 p-3 rounded-lg cursor-pointer dark:bg-700"
       onClick={(e) => e.stopPropagation()}
     >
       <div
