@@ -4,6 +4,7 @@ import { createContext, useContext } from "react";
 import axios from "axios";
 import { useFavorite } from "../FavoriteContext";
 import { useLike } from "../LikeContext";
+import { toastHandler } from "../../utils";
 
 const PostContext = createContext();
 
@@ -97,6 +98,7 @@ const PostProvider = ({ children }) => {
       );
       if (response.status === 201) {
         dispatch({ type: "ADD_POST", payload: response.data });
+        toastHandler("success", "Post Added");
       }
     } catch (err) {
       console.error(err);
@@ -111,6 +113,7 @@ const PostProvider = ({ children }) => {
       );
       if (response.status === 200) {
         dispatch({ type: "UPDATE_POST", payload: response.data });
+        toastHandler("success", "Post Updated");
       }
     } catch (err) {
       console.error(err);
@@ -126,6 +129,7 @@ const PostProvider = ({ children }) => {
       if (response.status === 200) {
         // console.log(response.data); {}
         dispatch({ type: "REMOVE_POST", payload: postId });
+        toastHandler("success", "Post Deleted");
       }
     } catch (err) {
       console.error(err);

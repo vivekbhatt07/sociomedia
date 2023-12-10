@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { usePost } from "../../context/PostContext";
 
-const SearchFilter = () => {
+const SearchFilter = ({ className }) => {
   const { state, dispatch } = usePost();
 
   const searchTypeList = Object.keys({
@@ -22,7 +22,9 @@ const SearchFilter = () => {
   });
 
   return (
-    <div className="flex gap-2 p-4 justify-between">
+    <div
+      className={`flex gap-6 p-4 md:justify-between md:flex-row flex-col ${className} md:items-center`}
+    >
       <div className="flex flex-row gap-3">
         <input
           name="searchText"
@@ -36,7 +38,7 @@ const SearchFilter = () => {
             });
           }}
         />
-        <div style={{ minWidth: "160px" }}>
+        <div className=" min-w-[120px] md:min-w-[160px]">
           <FormControl fullWidth>
             <InputLabel id="search_filter_type_label">Search Type</InputLabel>
             <Select
@@ -64,7 +66,7 @@ const SearchFilter = () => {
         </div>
       </div>
       <div style={{ minWidth: "160px" }}>
-        <FormControl fullWidth sx={{ maxWidth: "200px" }}>
+        <FormControl fullWidth>
           <InputLabel id="category_filter_type_label">Post Type</InputLabel>
           <Select
             name="categoryType"

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   Dashboard as DashboardIcon,
   LogoutOutlined,
@@ -9,8 +9,7 @@ import {
 
 import { Button, Skeleton } from "@mui/material";
 
-const Sidebar = () => {
-  const navigate = useNavigate();
+const Sidebar = ({ className }) => {
   const pages = [
     { id: "0", title: "Posts", reach: "/", icon: <DashboardIcon /> },
     { id: "1", title: "Like", reach: "/like", icon: <ThumbUp /> },
@@ -19,7 +18,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className="basis-1/6 flex flex-col justify-between pt-4"
+      className={`basis-1/6 flex flex-col justify-between pt-4 ${className}`}
       style={{ border: "1px solid #ddd" }}
     >
       <div className="flex flex-col gap-6">

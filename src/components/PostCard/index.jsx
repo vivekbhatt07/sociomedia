@@ -45,7 +45,14 @@ const PostCard = ({ postData }) => {
               title="Like"
               position="top"
               isArrow={true}
-              iconBtnSx={{ width: "35px", height: "35px" }}
+              iconBtnSx={{
+                width: "35px",
+                height: "35px",
+                backgroundColor: isLiked ? "#fff" : "#a8a29e",
+                "&:hover": {
+                  backgroundColor: isLiked ? "#fff" : "#7c3aed",
+                },
+              }}
               onClick={() => {
                 if (isLiked) {
                   likeAction({
@@ -58,14 +65,24 @@ const PostCard = ({ postData }) => {
               }}
             >
               <ThumbUp
-                sx={{ fontSize: "20px", color: isLiked ? "red" : "#fff" }}
+                sx={{
+                  fontSize: "20px",
+                  color: isLiked ? "rgb(24, 144, 255)" : "#fff",
+                }}
               />
             </TooltipIconAction>
             <TooltipIconAction
               title="Favorite"
               position="top"
               isArrow={true}
-              iconBtnSx={{ width: "35px", height: "35px" }}
+              iconBtnSx={{
+                width: "35px",
+                height: "35px",
+                backgroundColor: isFavorite ? "#fff" : "#a8a29e",
+                "&:hover": {
+                  backgroundColor: isFavorite ? "#fff" : "#7c3aed",
+                },
+              }}
               onClick={() => {
                 if (isFavorite) {
                   favoriteAction({
