@@ -20,7 +20,7 @@ export default function Landing() {
 
   return (
     <PageContainer>
-      <div className="p-4 border-b border-[#ddd] text-xl flex items-center gap-4">
+      <div className="p-4 border-b border-[#ddd] text-xl flex items-center gap-4 h-[10vh]">
         <span>Posts</span>
         <ModalProvider
           title="ADD POST"
@@ -32,17 +32,21 @@ export default function Landing() {
             </IconAction>
           }
         >
-          <PostForm closeAction={closeAddPostModal} formAction={addPost} />
+          <PostForm
+            closeAction={() => {
+              closeAddPostModal();
+            }}
+            formAction={addPost}
+          />
         </ModalProvider>
       </div>
-      <SearchFilter />
-      <div className="p-4">
-        <ul className="flex flex-col gap-3">
-          {filteredList?.map((post) => {
-            return <PostCard key={post.id} postData={post} />;
-          })}
-        </ul>
-      </div>
+      <SearchFilter className="h-[20vh] md:h-[15vh]" />
+
+      <ul className="flex flex-col gap-3 h-[70vh] overflow-y-scroll px-4 md:h-[75vh]">
+        {filteredList?.map((post) => {
+          return <PostCard key={post.id} postData={post} />;
+        })}
+      </ul>
     </PageContainer>
   );
 }
