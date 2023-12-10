@@ -1,8 +1,57 @@
-# React + Vite
+# SOCIOMEDIA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Link - https://sociomedia.vercel.app/
 
-Currently, two official plugins are available:
+A social media website where you can connect with your friends!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+
+## INSTALLATION
+
+```
+1. git clone https://github.com/vivekbhatt07/sociomedia.git
+2. cd sociomedia
+3. npm install
+4. npm run dev
+```
+
+---
+
+## Pages and Features -
+
+### Landing Page
+
+- List of Posts
+- Filter for Posts
+
+### Detail Page
+
+- Post Details
+- List of Comments
+
+### Like Page
+
+- List of liked posts
+
+### Favorite Page
+
+- List of favorite posts
+
+### [Other Features]
+
+- Dark & Light Mode
+- Filter Users
+- Toasts
+- Responsive
+
+## Built with -
+
+- React JS
+- React Context API + useReducer
+- React Router v6
+- Tailwind CSS
+- Material UI icons
+- React Hot Toast
+- Material UI Components
+- Custom Components
+- Axios
