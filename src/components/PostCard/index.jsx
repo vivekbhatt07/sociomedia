@@ -5,39 +5,13 @@ import TooltipIconAction from "../buttons/TooltipIconAction";
 import { Edit, Delete, Favorite, ThumbUp } from "@mui/icons-material";
 import ModalProvider from "../ModalProvider";
 import PostForm from "../postForm";
+import { usePost } from "../../context/PostContext";
+
 const PostCard = ({ postData }) => {
-  //   const { userId, id, title, body } = postData;
+  const { editPost, deletePost } = usePost();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const openEditModal = () => setIsEditModalOpen(true);
   const closeEditModal = () => setIsEditModalOpen(false);
-
-  const editPost = async (postData) => {
-    try {
-      const response = await axios.put(
-        `https://jsonplaceholder.typicode.com/posts/${postData.id}`,
-        postData
-      );
-      if (response.status === 200) {
-        console.log(response.data);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const deletePost = async (postId) => {
-    try {
-      const response = await axios.delete(
-        `https://jsonplaceholder.typicode.com/posts/${postData.id}`
-      );
-
-      if (response.status === 200) {
-        console.log(response.data); // {}
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   return (
     <li className="bg-200 p-3 rounded-lg" onClick={(e) => e.stopPropagation()}>
