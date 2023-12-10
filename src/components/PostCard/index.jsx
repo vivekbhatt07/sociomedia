@@ -6,12 +6,30 @@ import { Edit, Delete, Favorite, ThumbUp } from "@mui/icons-material";
 import ModalProvider from "../ModalProvider";
 import PostForm from "../postForm";
 import { usePost } from "../../context/PostContext";
+import { useLike } from "../../context/LikeContext";
+import { useFavorite } from "../../context/FavoriteContext";
 
 const PostCard = ({ postData }) => {
-  const { editPost, deletePost } = usePost();
+  const { state: likeState, dispatch: likeAction } = useLike();
+  const { state: favoriteState, dispatch: favoriteAction } = useFavorite();
+  const { state, editPost, deletePost } = usePost();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const openEditModal = () => setIsEditModalOpen(true);
   const closeEditModal = () => setIsEditModalOpen(false);
+
+  const isFavorite =
+    favoriteState.favoriteList.findIndex((post) => {
+      return post.id === postData.id;
+    }) === -1
+      ? false
+      : true;
+
+  const isLiked =
+    likeState.likeList.findIndex((post) => {
+      return post.id === postData.id;
+    }) === -1
+      ? false
+      : true;
 
   return (
     <li className="bg-200 p-3 rounded-lg" onClick={(e) => e.stopPropagation()}>
@@ -28,16 +46,43 @@ const PostCard = ({ postData }) => {
               position="top"
               isArrow={true}
               iconBtnSx={{ width: "35px", height: "35px" }}
+              onClick={() => {
+                if (isLiked) {
+                  likeAction({
+                    type: "REMOVE_FROM_LIKE",
+                    payload: postData.id,
+                  });
+                } else {
+                  likeAction({ type: "ADD_TO_LIKE", payload: postData });
+                }
+              }}
             >
-              <ThumbUp sx={{ fontSize: "20px" }} />
+              <ThumbUp
+                sx={{ fontSize: "20px", color: isLiked ? "red" : "#fff" }}
+              />
             </TooltipIconAction>
             <TooltipIconAction
               title="Favorite"
               position="top"
               isArrow={true}
               iconBtnSx={{ width: "35px", height: "35px" }}
+              onClick={() => {
+                if (isFavorite) {
+                  favoriteAction({
+                    type: "REMOVE_FROM_FAVORITE",
+                    payload: postData.id,
+                  });
+                } else {
+                  favoriteAction({
+                    type: "ADD_TO_FAVORITE",
+                    payload: postData,
+                  });
+                }
+              }}
             >
-              <Favorite sx={{ fontSize: "20px" }} />
+              <Favorite
+                sx={{ fontSize: "20px", color: isFavorite ? "red" : "#fff" }}
+              />
             </TooltipIconAction>
           </div>
           <div className="flex gap-2">

@@ -7,6 +7,12 @@ const PostContext = createContext();
 
 const initialPost = {
   postList: [],
+  filterBy: {
+    search: {
+      searchText: "",
+      searchType: "title",
+    },
+  },
 };
 
 const postReducer = (state, action) => {
@@ -14,6 +20,17 @@ const postReducer = (state, action) => {
     case "GET_POST": {
       return { ...state, postList: action.payload };
     }
+
+    case "SET_SEARCH_FILTER": {
+      return {
+        ...state,
+        filterBy: {
+          ...state.filterBy,
+          search: { ...state.filterBy.search, ...action.payload },
+        },
+      };
+    }
+
     case "ADD_POST": {
       return {
         ...state,
@@ -100,13 +117,35 @@ const PostProvider = ({ children }) => {
     }
   };
 
+  let filteredList = [...state.postList];
+
+  if (state.filterBy.search.searchText) {
+    filteredList =
+      state.filterBy.search.searchType === ""
+        ? filteredList
+        : filteredList.filter((item) => {
+            if (typeof item[state.filterBy.search.searchType] === "string") {
+              return item[state.filterBy.search.searchType]
+                .toLowerCase()
+                .includes(state.filterBy.search.searchText.toLowerCase());
+            }
+
+            if (typeof item[state.filterBy.search.searchType] === "number") {
+              return (
+                Number(item[state.filterBy.search.searchType]) ===
+                Number(state.filterBy.search.searchText)
+              );
+            }
+          });
+  }
+
   useEffect(() => {
     getAllPostHandler();
   }, []);
 
   return (
     <PostContext.Provider
-      value={{ state, dispatch, addPost, editPost, deletePost }}
+      value={{ filteredList, state, dispatch, addPost, editPost, deletePost }}
     >
       {children}
     </PostContext.Provider>

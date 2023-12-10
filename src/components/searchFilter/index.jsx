@@ -7,54 +7,31 @@ import {
   InputLabel,
   Select,
 } from "@mui/material";
+import { usePost } from "../../context/PostContext";
 
-const SearchFilter = ({ data, list, setFilteredList, setIsSearch }) => {
-  const [searchData, setSearchData] = useState({
-    searchText: "",
-    searchType: "name",
-  });
+const SearchFilter = () => {
+  const { state, dispatch } = usePost();
 
-  const searchTypeList = Object.keys(data).filter((item) => {
+  const searchTypeList = Object.keys({
+    title: "",
+    userId: "",
+    id: "",
+    body: "",
+  }).filter((item) => {
     return item !== "id";
   });
-
-  let filteredList = [...list];
-
-  if (searchData.searchText) {
-    filteredList =
-      searchData.searchType === ""
-        ? filteredList
-        : filteredList.filter((item) => {
-            if (typeof item[searchData.searchType] === "string") {
-              return item[searchData.searchType]
-                .toLowerCase()
-                .includes(searchData.searchText.toLowerCase());
-            }
-
-            if (typeof item[searchData.searchType] === "number") {
-              return (
-                Number(item[searchData.searchType]) ===
-                Number(searchData.searchText)
-              );
-            }
-          });
-  }
-
-  useEffect(() => {
-    setIsSearch(searchData.searchText.trim());
-    setFilteredList(filteredList);
-  }, [searchData.searchText]);
 
   return (
     <div className="flex gap-2 p-4">
       <input
         name="searchText"
         className="rounded-full px-4 py-2 border focus:border outline-none border-[#ddd] focus:border-[#8b5cf6] bg-[#fff] transition-all duration-300 text-[#000] text-sm font-light"
-        placeholder={`Search for ${searchData.searchType}`}
-        value={searchData.searchText}
+        placeholder={`Search for ${state.filterBy.search.searchType}`}
+        value={state.filterBy.search.searchText}
         onChange={(e) => {
-          setSearchData((prevSearchData) => {
-            return { ...prevSearchData, searchText: e.target.value };
+          dispatch({
+            type: "SET_SEARCH_FILTER",
+            payload: { searchText: e.target.value },
           });
         }}
       />
@@ -64,11 +41,12 @@ const SearchFilter = ({ data, list, setFilteredList, setIsSearch }) => {
           name="searchType"
           labelId="search_filter_type_label"
           id="search_Filter_type"
-          value={searchData.searchType}
+          value={state.filterBy.search.searchType}
           label="Select Search"
           onChange={(e) => {
-            setSearchData((prevSearchData) => {
-              return { ...prevSearchData, searchType: e.target.value };
+            dispatch({
+              type: "SET_SEARCH_FILTER",
+              payload: { searchType: e.target.value },
             });
           }}
         >
