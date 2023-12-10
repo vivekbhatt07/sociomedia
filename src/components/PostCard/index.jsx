@@ -33,9 +33,12 @@ const PostCard = ({ postData }) => {
       : true;
 
   return (
-    <li className="bg-200 p-3 rounded-lg" onClick={(e) => e.stopPropagation()}>
+    <li
+      className="bg-100 p-3 rounded-lg cursor-pointer"
+      onClick={(e) => e.stopPropagation()}
+    >
       <div
-        className="flex flex-col gap-12"
+        className="flex flex-col gap-4"
         onClick={() => navigate(`/${postData.id}`)}
       >
         {/* <div className="flex flex-col gap-12"> */}
@@ -47,14 +50,14 @@ const PostCard = ({ postData }) => {
           <div className="flex gap-2">
             <TooltipIconAction
               title="Like"
-              position="top"
+              position="bottom"
               isArrow={true}
               iconBtnSx={{
                 width: "35px",
                 height: "35px",
                 backgroundColor: isLiked ? "#fff" : "#a8a29e",
                 "&:hover": {
-                  backgroundColor: isLiked ? "#fff" : "#7c3aed",
+                  backgroundColor: isLiked ? "#fff" : "rgb(24, 144, 255)",
                 },
               }}
               onClick={(e) => {
@@ -78,14 +81,14 @@ const PostCard = ({ postData }) => {
             </TooltipIconAction>
             <TooltipIconAction
               title="Favorite"
-              position="top"
+              position="bottom"
               isArrow={true}
               iconBtnSx={{
                 width: "35px",
                 height: "35px",
                 backgroundColor: isFavorite ? "#fff" : "#a8a29e",
                 "&:hover": {
-                  backgroundColor: isFavorite ? "#fff" : "#7c3aed",
+                  backgroundColor: isFavorite ? "#fff" : "rgb(24, 144, 255)",
                 },
               }}
               onClick={(e) => {
@@ -116,7 +119,7 @@ const PostCard = ({ postData }) => {
               OpenAction={
                 <TooltipIconAction
                   title="Edit"
-                  position="top"
+                  position="bottom"
                   isArrow={true}
                   iconBtnSx={{ width: "35px", height: "35px" }}
                   onClick={(e) => {
@@ -138,7 +141,7 @@ const PostCard = ({ postData }) => {
 
             <TooltipIconAction
               title="Delete"
-              position="top"
+              position="bottom"
               isArrow={true}
               iconBtnSx={{ width: "35px", height: "35px" }}
               onClick={(e) => {

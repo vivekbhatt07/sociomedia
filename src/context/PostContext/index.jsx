@@ -68,6 +68,18 @@ const postReducer = (state, action) => {
         }),
       };
     }
+    case "RESET_FILTERS": {
+      return {
+        ...state,
+        filterBy: {
+          search: {
+            searchText: "",
+            searchType: "title",
+          },
+          category: "All",
+        },
+      };
+    }
   }
 };
 
