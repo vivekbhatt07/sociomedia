@@ -18,7 +18,7 @@ const PostForm = ({ isEdit, data, closeAction, formAction }) => {
 
   const handlePostFormSubmit = (e) => {
     e.preventDefault();
-    console.log({ id: data.id, ...postData });
+
     if (isEdit) {
       formAction({ id: data.id, ...postData });
     } else {
