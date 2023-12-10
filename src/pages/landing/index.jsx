@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import { PageContainer } from "../../layout";
 import axios from "axios";
 import PostCard from "../../components/PostCard";
-import { IconAction, ModalProvider, PostForm } from "../../components";
+import {
+  IconAction,
+  ModalProvider,
+  PostForm,
+  SearchFilter,
+} from "../../components";
 import { Add } from "@mui/icons-material";
 import { usePost } from "../../context/PostContext";
 
 export default function Landing() {
-  const { state, dispatch, addPost } = usePost();
+  const { filteredList, state, dispatch, addPost } = usePost();
   const [isAddPostModalOpen, setIsAddPostModalOpen] = useState(false);
 
   const openAddPostModal = () => setIsAddPostModalOpen(true);
@@ -30,9 +35,10 @@ export default function Landing() {
           <PostForm closeAction={closeAddPostModal} formAction={addPost} />
         </ModalProvider>
       </div>
+      <SearchFilter />
       <div className="p-4">
         <ul className="flex flex-col gap-3">
-          {state.postList.map((post) => {
+          {filteredList.map((post) => {
             return <PostCard key={post.id} postData={post} />;
           })}
         </ul>
