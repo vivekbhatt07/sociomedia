@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useReducer } from "react";
 import { createContext, useContext } from "react";
 import axios from "axios";
+import { useFavorite } from "../FavoriteContext";
+import { useLike } from "../LikeContext";
 
 const PostContext = createContext();
 
@@ -12,6 +14,7 @@ const initialPost = {
       searchText: "",
       searchType: "title",
     },
+    category: "All",
   },
 };
 
@@ -27,6 +30,16 @@ const postReducer = (state, action) => {
         filterBy: {
           ...state.filterBy,
           search: { ...state.filterBy.search, ...action.payload },
+        },
+      };
+    }
+
+    case "SET_CATEGORY_FILTER": {
+      return {
+        ...state,
+        filterBy: {
+          ...state.filterBy,
+          category: action.payload,
         },
       };
     }
@@ -58,6 +71,8 @@ const postReducer = (state, action) => {
 };
 
 const PostProvider = ({ children }) => {
+  const { state: favoriteState } = useFavorite();
+  const { state: likeState } = useLike();
   const [state, dispatch] = useReducer(postReducer, initialPost);
 
   const getAllPostHandler = async () => {
@@ -118,6 +133,15 @@ const PostProvider = ({ children }) => {
   };
 
   let filteredList = [...state.postList];
+
+  if (state.filterBy.category) {
+    filteredList =
+      state.filterBy.category === "All"
+        ? filteredList
+        : state.filterBy.category === "Favorite"
+        ? favoriteState.favoriteList
+        : likeState.likeList;
+  }
 
   if (state.filterBy.search.searchText) {
     filteredList =

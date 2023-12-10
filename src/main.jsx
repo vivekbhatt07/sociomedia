@@ -10,13 +10,13 @@ import { PostProvider, LikeProvider, FavoriteProvider } from "./context";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Router>
-      <PostProvider>
-        <FavoriteProvider>
-          <LikeProvider>
+      <FavoriteProvider>
+        <LikeProvider>
+          <PostProvider>
             <App />
-          </LikeProvider>
-        </FavoriteProvider>
-      </PostProvider>
+          </PostProvider>
+        </LikeProvider>
+      </FavoriteProvider>
     </Router>
   </React.StrictMode>
 );
