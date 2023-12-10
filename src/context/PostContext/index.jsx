@@ -48,7 +48,7 @@ const postReducer = (state, action) => {
     case "ADD_POST": {
       return {
         ...state,
-        postList: [...state.postList, action.payload],
+        postList: [action.payload, ...state.postList],
       };
     }
 
