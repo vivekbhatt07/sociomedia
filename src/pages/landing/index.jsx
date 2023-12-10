@@ -38,7 +38,7 @@ export default function Landing() {
       <SearchFilter />
       <div className="p-4">
         <ul className="flex flex-col gap-3">
-          {filteredList.map((post) => {
+          {filteredList?.map((post) => {
             return <PostCard key={post.id} postData={post} />;
           })}
         </ul>
