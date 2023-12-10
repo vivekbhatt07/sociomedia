@@ -33,8 +33,8 @@ const PostCard = ({ postData }) => {
 
   return (
     <li className="bg-200 p-3 rounded-lg" onClick={(e) => e.stopPropagation()}>
-      {/* <Link to={`/${postData.id}`} className="flex flex-col gap-12"> */}
-      <Link className="flex flex-col gap-12">
+      <Link to={`/${postData.id}`} className="flex flex-col gap-12">
+        {/* <Link className="flex flex-col gap-12"> */}
         <div className="flex flex-col gap-2">
           <h3 className="text-base font-medium">{postData.title}</h3>
           <p className="text-xs">{postData.body}</p>

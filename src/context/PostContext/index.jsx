@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useReducer } from "react";
 import { createContext, useContext } from "react";
 import axios from "axios";
@@ -74,15 +74,18 @@ const postReducer = (state, action) => {
 const PostProvider = ({ children }) => {
   const { state: favoriteState } = useFavorite();
   const { state: likeState } = useLike();
+  const [isLoading, setIsLoading] = useState(false);
   const [state, dispatch] = useReducer(postReducer, initialPost);
 
   const getAllPostHandler = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/posts"
       );
 
       if (response.status === 200) {
+        setIsLoading(false);
         dispatch({ type: "GET_POST", payload: response.data });
       }
     } catch (err) {
@@ -173,7 +176,15 @@ const PostProvider = ({ children }) => {
 
   return (
     <PostContext.Provider
-      value={{ filteredList, state, dispatch, addPost, editPost, deletePost }}
+      value={{
+        filteredList,
+        state,
+        dispatch,
+        addPost,
+        editPost,
+        deletePost,
+        isLoading,
+      }}
     >
       {children}
     </PostContext.Provider>

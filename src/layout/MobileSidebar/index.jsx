@@ -32,6 +32,7 @@ const MobileSidebar = ({ className }) => {
               justifyContent: "flex-start",
               padding: "0",
               backgroundColor: "#fff",
+              padding: "0",
             }}
           >
             <NavLink
@@ -45,6 +46,7 @@ const MobileSidebar = ({ className }) => {
                 color: isActive ? "#1890FF" : "#282828",
                 borderRight: isActive ? "5px solid #1890FF" : "2px solid #fff",
                 justifyContent: "center",
+                height: "100%",
               })}
             >
               {page.icon}
