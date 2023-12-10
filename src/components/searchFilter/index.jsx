@@ -41,7 +41,7 @@ const SearchFilter = ({ className }) => {
             });
           }}
         />
-        <div className=" min-w-[120px] md:min-w-[160px]">
+        <div className=" min-w-[100px] md:min-w-[160px]">
           <FormControl fullWidth>
             <InputLabel id="search_filter_type_label">Search Type</InputLabel>
             <Select

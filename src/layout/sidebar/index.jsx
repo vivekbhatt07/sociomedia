@@ -19,7 +19,6 @@ import { useMode } from "../../context";
 
 const Sidebar = ({ className }) => {
   const { isDarkTheme, toggleTheme } = useMode();
-  console.log(isDarkTheme);
 
   const pages = [
     { id: "0", title: "Posts", reach: "/", icon: <DashboardIcon /> },
