@@ -64,7 +64,7 @@ export default function Detail() {
           {isPost ? (
             <Skeleton variant="rectangular" width={210} height={24} />
           ) : (
-            <h2>{postData?.title}</h2>
+            <h2 className="text-2xl">{postData?.title}</h2>
           )}
 
           {isPost ? (
